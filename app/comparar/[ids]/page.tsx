@@ -8,7 +8,7 @@ import { eur } from "@/components/advisor/setup";
 import { Card, Eyebrow } from "@/components/advisor/ui";
 import { AlgorithmVerdict, CompareSelector } from "@/components/compare/CompareClient";
 import { CompareTable, countAdvantages } from "@/components/compare/CompareTable";
-import { MonitorIllustration } from "@/components/monitor/MonitorIllustration";
+import { MonitorImage } from "@/components/monitor/MonitorImage";
 import { BuyButton, PriceStatusBadge, SectionTitle } from "@/components/monitor/ProductParts";
 import { getMonitor, monitors } from "@/data/monitors";
 import { getPriceStatus } from "@/lib/engine/calculator";
@@ -119,7 +119,7 @@ function Contender({ monitor: m, advantages }: { monitor: Monitor; advantages: n
   return (
     <Card className="flex flex-col p-6">
       <div className="rounded-2xl bg-gradient-to-b from-white to-canvas px-2 pt-2">
-        <MonitorIllustration monitor={m} className="w-full" />
+        <MonitorImage monitor={m} priority="high" sizes="(min-width: 768px) 440px, 100vw" className="aspect-[3/2] w-full" />
       </div>
       <div className="mt-6 flex items-start justify-between gap-3">
         <div className="min-w-0">

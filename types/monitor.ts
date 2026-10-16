@@ -85,7 +85,7 @@ export interface Monitor {
   consumo_tipico_w: number;
   garantia_anios: number;
   friccion_diaria: DailyFriction;
-  imagen?: string; // ruta en /public; si falta se dibuja una ilustración a escala
+  imageUrl: string; // ruta en /public (/monitors/<id>.webp) o URL de un dominio en images.remotePatterns; si no carga se dibuja una ilustración a escala
   afiliado_url?: string; // sobrescribe el enlace de compra por defecto
   notas?: string;
 }

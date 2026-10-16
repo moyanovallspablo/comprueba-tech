@@ -6,7 +6,7 @@ import { ArrowLeftRight, Check, Plus, Search, SearchX, SlidersHorizontal, X } fr
 import { useMemo, useState, type CSSProperties, type ReactNode } from "react";
 import { BUDGET_MAX, PROFILE_OPTIONS, eur, toEquipment } from "@/components/advisor/setup";
 import { BRAND_BUTTON_SIZES, Card, Eyebrow, brandButtonBase, cx } from "@/components/advisor/ui";
-import { MonitorIllustration } from "@/components/monitor/MonitorIllustration";
+import { MonitorImage } from "@/components/monitor/MonitorImage";
 import { PriceStatusBadge } from "@/components/monitor/ProductParts";
 import { monitors } from "@/data/monitors";
 import {
@@ -196,7 +196,7 @@ export function CatalogExplorer() {
           ) : (
             <motion.ul layout className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
               <AnimatePresence mode="popLayout" initial={false}>
-                {results.map((m) => (
+                {results.map((m, i) => (
                   <motion.li
                     key={m.id}
                     layout
@@ -207,6 +207,7 @@ export function CatalogExplorer() {
                   >
                     <CatalogCard
                       monitor={m}
+                      aboveFold={i < 3}
                       scored={scores.get(m.id)!}
                       profileLabel={PROFILE_OPTIONS.find((p) => p.id === profile)!.label}
                       inCompare={compare.includes(m.id)}
@@ -447,6 +448,7 @@ function ActiveChips({
 
 function CatalogCard({
   monitor: m,
+  aboveFold,
   scored,
   profileLabel,
   inCompare,
@@ -454,6 +456,8 @@ function CatalogCard({
   onToggleCompare,
 }: {
   monitor: Monitor;
+  /** Primeras tarjetas del listado: su imagen se pide con prioridad alta. */
+  aboveFold: boolean;
   scored: ScoredMonitor;
   profileLabel: string;
   inCompare: boolean;
@@ -479,7 +483,12 @@ function CatalogCard({
       )}
     >
       <Link href={monitorHref(m.id)} tabIndex={-1} aria-hidden className="block h-40 bg-gradient-to-b from-white to-canvas px-3 pt-2 sm:h-auto">
-        <MonitorIllustration monitor={m} className="size-full sm:h-auto" />
+        <MonitorImage
+          monitor={m}
+          priority={aboveFold ? "high" : undefined}
+          sizes="(min-width: 1280px) 280px, (min-width: 1024px) 340px, (min-width: 640px) 50vw, 100vw"
+          className="h-full sm:h-auto sm:aspect-[3/2]"
+        />
       </Link>
 
       <div className="flex flex-1 flex-col p-6">

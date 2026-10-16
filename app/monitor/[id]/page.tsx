@@ -7,7 +7,7 @@ import { TransparencyCard } from "@/components/site/RadicalTransparency";
 import { SpatialDeltaPanel } from "@/components/3d/SpatialDeltaPanel";
 import { eur } from "@/components/advisor/setup";
 import { Card } from "@/components/advisor/ui";
-import { MonitorIllustration } from "@/components/monitor/MonitorIllustration";
+import { MonitorImage } from "@/components/monitor/MonitorImage";
 import {
   BuyButton,
   DailyFrictionGrid,
@@ -73,15 +73,13 @@ async function MonitorContent({ params }: { params: PageProps<"/monitor/[id]">["
       {/* ── Cabecera: imagen + precio ── */}
       <section className="mt-6 grid gap-6 lg:grid-cols-[1.15fr_1fr]">
         <Card className="flex flex-col justify-end bg-gradient-to-b from-white to-canvas p-6">
-          {m.imagen ? (
-            // eslint-disable-next-line @next/next/no-img-element -- imágenes de catálogo locales, sin optimizar todavía
-            <img src={m.imagen} alt={`${m.marca} ${m.modelo}`} className="mx-auto max-h-72 object-contain" />
-          ) : (
-            <MonitorIllustration monitor={m} className="w-full" />
-          )}
-          <p className="mt-2 text-center font-mono text-[11px] text-zinc-500">
-            Ilustración a escala real · {m.pulgadas.toLocaleString("es-ES")}&quot; · {m.ancho_cm.toLocaleString("es-ES")} cm de ancho
-          </p>
+          <MonitorImage
+            monitor={m}
+            priority="preload"
+            sizes="(min-width: 1024px) 480px, 100vw"
+            caption={`${m.pulgadas.toLocaleString("es-ES")}" · ${m.ancho_cm.toLocaleString("es-ES")} cm de ancho`}
+            className="aspect-[3/2] w-full"
+          />
         </Card>
 
         <Card className="flex flex-col p-6 sm:p-8">
