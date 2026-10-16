@@ -1,0 +1,77 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# ── Dependencias ──
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# ── Next.js / build ──
+/.next/
+/out/
+/build
+/dist
+.turbo/
+.swc/
+
+# ── Tests y auditorías ──
+/coverage
+/playwright-report/
+/test-results/
+# Capturas que genera `npm run audit:overflow -- <url> <carpeta>` si se guardan dentro del repo
+/audit-out/
+
+# ── Variables de entorno (solo se versiona la plantilla) ──
+.env
+.env*.local
+.env.development
+.env.production
+.env.test
+.env*
+!.env.example
+
+# ── TypeScript ──
+*.tsbuildinfo
+next-env.d.ts
+
+# ── Logs y depuración ──
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.eslintcache
+
+# ── Despliegue ──
+.vercel
+
+# ── Certificados y secretos ──
+*.pem
+*.key
+*.p12
+
+# ── Sistema operativo ──
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ── Editores ──
+.idea/
+*.swp
+*.swo
+*~
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# ── Herramientas locales de IA (ajustes personales) ──
+.claude/settings.local.json
