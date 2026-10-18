@@ -298,6 +298,7 @@ const seeds: MonitorSeed[] = [
     modelo: "AW3423DWF",
     asin: "B0BHTDDMDN",
     // Amazon.es (2026-10-18): no disponible. Se mantiene el precio de referencia.
+    disponible: false,
     imageUrl: "https://m.media-amazon.com/images/I/41QJ6Cy2oqL._AC_SL1280_.jpg",
     precio_eur: 699,
     precio_minimo_historico_eur: 599,

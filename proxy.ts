@@ -22,5 +22,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/monitor/:id", "/comparar/:ids"],
+  matcher: ["/monitor/:id", "/comparar/:slug"],
 };

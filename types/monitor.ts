@@ -88,6 +88,7 @@ export interface Monitor {
   imageUrl?: string; // ruta en /public (/monitors/<id>.webp) o URL de un dominio en images.remotePatterns; sin ella o si no carga se dibuja una ilustración a escala
   asin?: string; // ASIN de amazon.es verificado; sin él, el botón de compra lleva a una búsqueda
   afiliado_url?: string; // sobrescribe el enlace de compra; si es de Amazon también recibe el tag
+  disponible?: boolean; // false si no hay unidades nuevas a la venta (se declara OutOfStock en el JSON-LD)
   notas?: string;
 }
 

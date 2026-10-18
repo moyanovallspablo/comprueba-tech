@@ -10,41 +10,57 @@ import { AlgorithmVerdict, CompareSelector } from "@/components/compare/CompareC
 import { CompareTable, countAdvantages } from "@/components/compare/CompareTable";
 import { MonitorImage } from "@/components/monitor/MonitorImage";
 import { BuyButton, PriceStatusBadge, SectionTitle } from "@/components/monitor/ProductParts";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { getMonitor, monitors } from "@/data/monitors";
 import { getPriceStatus } from "@/lib/engine/calculator";
 import { SPATIAL_ANCHOR, compareHref, monitorHref, parseCompareSlug } from "@/lib/routes";
+import {
+  SEO_YEAR,
+  canonicalCompareHref,
+  compareDescription,
+  compareFaq,
+  compareTitle,
+  faqJsonLd,
+  fullName,
+} from "@/lib/seo";
 import type { Monitor } from "@/types/monitor";
 
+/**
+ * Todas las parejas del catálogo en los dos órdenes: cualquier enlace interno o del selector sirve HTML
+ * estático. El canonical agrupa "a-vs-b" y "b-vs-a" en una sola URL indexable.
+ */
 export function generateStaticParams() {
-  const params: { ids: string }[] = [];
-  for (let i = 0; i < monitors.length; i++) {
-    for (let j = i + 1; j < monitors.length; j++) {
-      params.push({ ids: compareHref(monitors[i].id, monitors[j].id).replace("/comparar/", "") });
-    }
-  }
-  return params;
+  return monitors.flatMap((a) =>
+    monitors.filter((b) => b.id !== a.id).map((b) => ({ slug: compareHref(a.id, b.id).replace("/comparar/", "") })),
+  );
 }
 
-function resolvePair(ids: string): [Monitor, Monitor] | null {
-  const parsed = parseCompareSlug(ids);
+function resolvePair(slug: string): [Monitor, Monitor] | null {
+  const parsed = parseCompareSlug(slug);
   if (!parsed) return null;
   const a = getMonitor(parsed[0]);
   const b = getMonitor(parsed[1]);
   return a && b ? [a, b] : null;
 }
 
-export async function generateMetadata({ params }: PageProps<"/comparar/[ids]">): Promise<Metadata> {
-  const pair = resolvePair((await params).ids);
+export async function generateMetadata({ params }: PageProps<"/comparar/[slug]">): Promise<Metadata> {
+  const pair = resolvePair((await params).slug);
   if (!pair) return {};
   const [a, b] = pair;
+  const title = compareTitle(a, b);
+  const description = compareDescription(a, b);
+  const canonical = canonicalCompareHref(a.id, b.id);
   return {
-    title: `${a.marca} ${a.modelo} vs ${b.marca} ${b.modelo}`,
-    description: `Comparativa frente a frente: especificaciones, ventajas de cada uno y cuál elegiría el algoritmo para tu uso.`,
+    // Sin la plantilla "· comprueba.tech": el título ya roza el límite que muestra Google.
+    title: { absolute: title },
+    description,
+    alternates: { canonical },
+    openGraph: { type: "website", siteName: "comprueba.tech", locale: "es_ES", url: canonical, title, description },
   };
 }
 
 // Shell síncrono para navegación instantánea; los params se resuelven dentro de <Suspense>.
-export default function ComparePage({ params }: PageProps<"/comparar/[ids]">) {
+export default function ComparePage({ params }: PageProps<"/comparar/[slug]">) {
   return (
     <main className="mx-auto w-full max-w-5xl px-4 pb-20 pt-8 sm:px-6 sm:pt-10">
       <Link href="/" className="inline-flex items-center gap-2 text-sm text-zinc-500 transition hover:text-ink">
@@ -70,18 +86,25 @@ function CompareSkeleton() {
   );
 }
 
-async function CompareContent({ params }: { params: PageProps<"/comparar/[ids]">["params"] }) {
-  const pair = resolvePair((await params).ids);
+async function CompareContent({ params }: { params: PageProps<"/comparar/[slug]">["params"] }) {
+  const pair = resolvePair((await params).slug);
   if (!pair) notFound();
   const [a, b] = pair;
   const advantages = countAdvantages(a, b);
+  const faq = compareFaq(a, b);
 
   return (
     <>
+      <JsonLd data={faqJsonLd(faq)} />
+
       <div className="mb-6 mt-6 px-1">
         <Eyebrow>Frente a frente</Eyebrow>
         <h1 className="mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-          {a.modelo} <span className="text-zinc-500">vs</span> {b.modelo}
+          {fullName(a)} <span className="text-zinc-500">vs</span> {fullName(b)}
+          <span className="sr-only">: </span>
+          <span className="mt-2 block text-base font-normal tracking-normal text-zinc-500 sm:text-lg">
+            Comparativa y veredicto ({SEO_YEAR})
+          </span>
         </h1>
       </div>
 
@@ -109,6 +132,19 @@ async function CompareContent({ params }: { params: PageProps<"/comparar/[ids]">
           description="En verde, la ventaja de cada uno en cada dato. Las filas sin color son informativas o empatan."
         />
         <CompareTable a={a} b={b} />
+      </section>
+
+      {/* Visible a propósito: Google solo acepta FAQPage si las respuestas están en la página. */}
+      <section className="mt-14">
+        <SectionTitle eyebrow="Preguntas frecuentes" title="Diferencias clave" />
+        <Card className="divide-y divide-hairline">
+          {faq.map((f) => (
+            <div key={f.question} className="p-6">
+              <h3 className="font-semibold text-ink">{f.question}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-zinc-600">{f.answer}</p>
+            </div>
+          ))}
+        </Card>
       </section>
     </>
   );

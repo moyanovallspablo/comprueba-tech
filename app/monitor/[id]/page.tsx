@@ -8,6 +8,7 @@ import { SpatialDeltaPanel } from "@/components/3d/SpatialDeltaPanel";
 import { eur } from "@/components/advisor/setup";
 import { Card } from "@/components/advisor/ui";
 import { MonitorImage } from "@/components/monitor/MonitorImage";
+import { JsonLd } from "@/components/seo/JsonLd";
 import {
   BuyButton,
   DailyFrictionGrid,
@@ -23,6 +24,8 @@ import {
 } from "@/components/monitor/ProfileInsights";
 import { getMonitor, monitors } from "@/data/monitors";
 import { getPpi, getPriceStatus } from "@/lib/engine/calculator";
+import { monitorHref } from "@/lib/routes";
+import { fullName, monitorDescription, productJsonLd } from "@/lib/seo";
 
 export function generateStaticParams() {
   return monitors.map((m) => ({ id: m.id }));
@@ -32,8 +35,9 @@ export async function generateMetadata({ params }: PageProps<"/monitor/[id]">): 
   const m = getMonitor((await params).id);
   if (!m) return {};
   return {
-    title: `${m.marca} ${m.modelo}`,
-    description: `Ficha, fricción diaria, ventajas y sacrificios del ${m.marca} ${m.modelo} (${m.pulgadas}", ${m.hz} Hz, ${m.panel}).`,
+    title: fullName(m),
+    description: monitorDescription(m),
+    alternates: { canonical: monitorHref(m.id) },
   };
 }
 
@@ -70,6 +74,8 @@ async function MonitorContent({ params }: { params: PageProps<"/monitor/[id]">["
 
   return (
     <>
+      <JsonLd data={productJsonLd(m)} />
+
       {/* ── Cabecera: imagen + precio ── */}
       <section className="mt-6 grid gap-6 lg:grid-cols-[1.15fr_1fr]">
         <Card className="flex flex-col justify-end bg-gradient-to-b from-white to-canvas p-6">
