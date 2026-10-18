@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Header } from "@/components/layout/Header";
 import { NAV_ITEMS } from "@/components/layout/nav";
 import { MotionProvider } from "@/components/site/MotionProvider";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -60,6 +61,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </div>
           </footer>
         </MotionProvider>
+        <Analytics />
       </body>
     </html>
   );
