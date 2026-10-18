@@ -28,8 +28,10 @@ const SETUP = (extra) =>
 
 const SCENARIOS = [
   { name: "/", path: "/" },
-  { name: "wizard-3", path: "/", storage: SETUP({ completed: false }), clicks: ["Continuar", "Continuar"] },
-  { name: "results", path: "/", storage: SETUP({ completed: true }) },
+  { name: "/asesor", path: "/asesor" },
+  { name: "/monitores?preset", path: "/monitores?perfil=gaming&hz=144" },
+  { name: "wizard-3", path: "/asesor", storage: SETUP({ completed: false }), clicks: ["Continuar", "Continuar"] },
+  { name: "results", path: "/asesor", storage: SETUP({ completed: true }) },
   { name: "/monitores", path: "/monitores" },
   { name: "/comparar", path: "/comparar" },
   { name: "/comparar/dell-u2724de-vs-lg-27gr83q", path: "/comparar/dell-u2724de-vs-lg-27gr83q" },

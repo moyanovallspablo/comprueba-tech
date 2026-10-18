@@ -35,11 +35,17 @@ function toggle<T>(list: T[], value: T): T[] {
   return list.includes(value) ? list.filter((v) => v !== value) : [...list, value];
 }
 
-export function CatalogExplorer() {
+export function CatalogExplorer({
+  initialFilters = DEFAULT_FILTERS,
+  initialProfile = null,
+}: {
+  initialFilters?: CatalogFilters;
+  initialProfile?: Profile | null;
+}) {
   const setup = useSetup();
-  const [filters, setFilters] = useState<CatalogFilters>(DEFAULT_FILTERS);
+  const [filters, setFilters] = useState<CatalogFilters>(initialFilters);
   const [sort, setSort] = useState<SortKey>("score");
-  const [profileOverride, setProfileOverride] = useState<Profile | null>(null);
+  const [profileOverride, setProfileOverride] = useState<Profile | null>(initialProfile);
   const [compare, setCompare] = useState<string[]>([]);
   const [sheetOpen, setSheetOpen] = useState(false);
 

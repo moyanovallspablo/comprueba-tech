@@ -24,7 +24,7 @@ import {
 } from "@/components/monitor/ProfileInsights";
 import { getMonitor, monitors } from "@/data/monitors";
 import { getPpi, getPriceStatus } from "@/lib/engine/calculator";
-import { monitorHref } from "@/lib/routes";
+import { ADVISOR_HREF, monitorHref } from "@/lib/routes";
 import { fullName, monitorDescription, productJsonLd } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: PageProps<"/monitor/[id]">): 
 export default function MonitorPage({ params }: PageProps<"/monitor/[id]">) {
   return (
     <main className="mx-auto w-full max-w-5xl px-4 pb-20 pt-8 sm:px-6 sm:pt-10">
-      <Link href="/" className="inline-flex items-center gap-2 text-sm text-zinc-500 transition hover:text-ink">
+      <Link href={ADVISOR_HREF} className="inline-flex items-center gap-2 text-sm text-zinc-500 transition hover:text-ink">
         <ArrowLeft className="size-4" /> Volver a mi recomendación
       </Link>
       <Suspense fallback={<MonitorSkeleton />}>

@@ -87,10 +87,10 @@ async function main() {
     for (const value of ["no-preference", "reduce"]) {
       await send("Emulation.setEmulatedMedia", { features: [{ name: "prefers-reduced-motion", value }] });
       // Setup sin completar → el wizard arranca en el paso 1; tres clics llevan a los resultados.
-      await send("Page.navigate", { url: BASE + "/" });
+      await send("Page.navigate", { url: BASE + "/asesor" });
       await sleep(1500);
       await evaluate(`localStorage.setItem("comprueba.setup.v1", ${JSON.stringify(SETUP)})`);
-      await send("Page.navigate", { url: BASE + "/" });
+      await send("Page.navigate", { url: BASE + "/asesor" });
       await sleep(1500);
       for (const label of ["Continuar", "Continuar", "Ver mi recomendación"]) {
         await click(label);

@@ -13,7 +13,7 @@ import { BuyButton, PriceStatusBadge, SectionTitle } from "@/components/monitor/
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getMonitor, monitors } from "@/data/monitors";
 import { getPriceStatus } from "@/lib/engine/calculator";
-import { SPATIAL_ANCHOR, compareHref, monitorHref, parseCompareSlug } from "@/lib/routes";
+import { ADVISOR_HREF, SPATIAL_ANCHOR, compareHref, monitorHref, parseCompareSlug } from "@/lib/routes";
 import {
   SEO_YEAR,
   canonicalCompareHref,
@@ -63,7 +63,7 @@ export async function generateMetadata({ params }: PageProps<"/comparar/[slug]">
 export default function ComparePage({ params }: PageProps<"/comparar/[slug]">) {
   return (
     <main className="mx-auto w-full max-w-5xl px-4 pb-20 pt-8 sm:px-6 sm:pt-10">
-      <Link href="/" className="inline-flex items-center gap-2 text-sm text-zinc-500 transition hover:text-ink">
+      <Link href={ADVISOR_HREF} className="inline-flex items-center gap-2 text-sm text-zinc-500 transition hover:text-ink">
         <ArrowLeft className="size-4" /> Volver a mi recomendación
       </Link>
       <Suspense fallback={<CompareSkeleton />}>

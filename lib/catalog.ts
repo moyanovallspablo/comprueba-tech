@@ -1,6 +1,6 @@
 import { monitors as catalog } from "@/data/monitors";
 import { matchesQuery } from "@/lib/search";
-import type { Monitor } from "@/types/monitor";
+import type { Monitor, Profile } from "@/types/monitor";
 
 /** Facetas del catálogo: cada monitor cae en exactamente una opción de cada faceta. */
 
@@ -125,4 +125,61 @@ export const SORT_OPTIONS: { id: SortKey; label: string }[] = [
   { id: "score", label: "Mejor puntuación para tu perfil" },
   { id: "price-asc", label: "Precio: menor a mayor" },
   { id: "price-desc", label: "Precio: mayor a menor" },
+];
+
+/* ── Estado en la URL: permite enlazar el catálogo ya filtrado (accesos rápidos de la portada) ── */
+
+const PROFILES: Profile[] = ["mac", "gaming", "oficina"];
+
+export interface CatalogPreset {
+  filters?: Partial<CatalogFilters>;
+  profile?: Profile;
+}
+
+const pick = <T extends string>(raw: string | null, allowed: readonly T[]): T[] =>
+  (raw ?? "").split(",").filter((v): v is T => (allowed as readonly string[]).includes(v));
+
+const priceParam = (raw: string | null, fallback: number) => {
+  const n = Number(raw);
+  return raw && Number.isFinite(n) ? Math.min(PRICE_BOUNDS.max, Math.max(PRICE_BOUNDS.min, n)) : fallback;
+};
+
+/** "?perfil=gaming&hz=144&max=300" → filtros y perfil validados; lo desconocido se ignora. */
+export function catalogStateFromParams(sp: URLSearchParams): { filters: CatalogFilters; profile: Profile | null } {
+  const usbc = sp.get("usbc");
+  const profile = sp.get("perfil");
+  return {
+    filters: {
+      query: sp.get("q") ?? "",
+      priceMin: priceParam(sp.get("min"), DEFAULT_FILTERS.priceMin),
+      priceMax: priceParam(sp.get("max"), DEFAULT_FILTERS.priceMax),
+      resolutions: pick(sp.get("res"), RESOLUTION_OPTIONS),
+      refresh: pick(sp.get("hz"), REFRESH_OPTIONS.map((o) => o.id)),
+      panels: pick(sp.get("panel"), PANEL_OPTIONS),
+      usbc: USBC_OPTIONS.some((o) => o.id === usbc) ? (usbc as UsbcFilter) : "any",
+    },
+    profile: PROFILES.includes(profile as Profile) ? (profile as Profile) : null,
+  };
+}
+
+export function catalogHref({ filters = {}, profile }: CatalogPreset = {}): string {
+  const sp = new URLSearchParams();
+  if (profile) sp.set("perfil", profile);
+  if (filters.query) sp.set("q", filters.query);
+  if (filters.resolutions?.length) sp.set("res", filters.resolutions.join(","));
+  if (filters.refresh?.length) sp.set("hz", filters.refresh.join(","));
+  if (filters.panels?.length) sp.set("panel", filters.panels.join(","));
+  if (filters.usbc && filters.usbc !== "any") sp.set("usbc", filters.usbc);
+  if (filters.priceMin !== undefined) sp.set("min", String(filters.priceMin));
+  if (filters.priceMax !== undefined) sp.set("max", String(filters.priceMax));
+  const qs = sp.toString();
+  return qs ? `/monitores?${qs}` : "/monitores";
+}
+
+/** Accesos rápidos de la portada, bajo el buscador. */
+export const QUICK_PRESETS: (CatalogPreset & { id: string; label: string })[] = [
+  { id: "mac", label: "Para Mac / Retina", profile: "mac", filters: { resolutions: ["4K", "5K"] } },
+  { id: "gaming", label: "Gaming 144 Hz", profile: "gaming", filters: { refresh: ["144"] } },
+  { id: "oficina-4k", label: "Oficina 4K", profile: "oficina", filters: { resolutions: ["4K"] } },
+  { id: "presupuesto", label: "Presupuesto < 300 €", filters: { priceMax: 300 } },
 ];

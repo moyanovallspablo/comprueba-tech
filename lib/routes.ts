@@ -1,5 +1,8 @@
 const COMPARE_SEPARATOR = "-vs-";
 
+/** Asesor (wizard + recomendación personalizada). La home es la portada editorial. */
+export const ADVISOR_HREF = "/asesor";
+
 export const monitorHref = (id: string) => `/monitor/${id}`;
 
 export const compareHref = (a: string, b: string) => `/comparar/${a}${COMPARE_SEPARATOR}${b}`;

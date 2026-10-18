@@ -13,6 +13,7 @@ import {
   type Setup,
 } from "@/components/advisor/setup";
 import { Eyebrow, OptionButton, brandButtonBase, cx } from "@/components/advisor/ui";
+import { ADVISOR_HREF } from "@/lib/routes";
 import { resetSetup, updateSetup } from "@/lib/setup-store";
 
 /** Panel lateral "Mi Setup": edita el setup global desde cualquier página. */
@@ -146,7 +147,7 @@ export function SetupDrawer({ open, onClose, setup }: { open: boolean; onClose: 
               </button>
               {setup.profile && (
                 <Link
-                  href="/"
+                  href={ADVISOR_HREF}
                   onClick={() => {
                     updateSetup({ completed: true });
                     onClose();

@@ -1,4 +1,5 @@
 import { ArrowLeftRight, LayoutGrid, Sparkles, type LucideIcon } from "lucide-react";
+import { ADVISOR_HREF } from "@/lib/routes";
 
 export interface NavItem {
   href: string;
@@ -11,12 +12,12 @@ export interface NavItem {
 
 export const NAV_ITEMS: NavItem[] = [
   {
-    href: "/",
+    href: ADVISOR_HREF,
     label: "Asesor",
     description: "Recomendación personalizada en tres preguntas",
     icon: Sparkles,
-    keywords: "inicio recomendacion asistente asesor",
-    isActive: (p) => p === "/",
+    keywords: "recomendacion asistente asesor wizard",
+    isActive: (p) => p === ADVISOR_HREF,
   },
   {
     href: "/monitores",

@@ -69,14 +69,23 @@ function buildItems(query: string): PaletteItem[] {
     : [...found, ...uniqueComparisons, ...matchingPages];
 }
 
-export function CommandPalette({ open, onClose }: { open: boolean; onClose: () => void }) {
-  return <AnimatePresence>{open && <PaletteDialog onClose={onClose} />}</AnimatePresence>;
+export function CommandPalette({
+  open,
+  onClose,
+  initialQuery = "",
+}: {
+  open: boolean;
+  onClose: () => void;
+  /** Texto con el que se abre (p. ej. la primera tecla pulsada sobre el buscador de la portada). */
+  initialQuery?: string;
+}) {
+  return <AnimatePresence>{open && <PaletteDialog onClose={onClose} initialQuery={initialQuery} />}</AnimatePresence>;
 }
 
-function PaletteDialog({ onClose }: { onClose: () => void }) {
+function PaletteDialog({ onClose, initialQuery }: { onClose: () => void; initialQuery: string }) {
   const router = useRouter();
   const listId = useId();
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(initialQuery);
   const [active, setActive] = useState(0);
   const optionRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const items = useMemo(() => buildItems(query), [query]);

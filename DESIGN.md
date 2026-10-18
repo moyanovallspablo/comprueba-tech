@@ -84,6 +84,7 @@ Fuentes cargadas con `next/font` en [`app/layout.tsx`](app/layout.tsx) y expuest
 | Rol | Clases | Notas |
 | --- | --- | --- |
 | Display (hero) | `text-4xl sm:text-5xl font-semibold tracking-tight` | Una por página. |
+| Display XL (portada) | `text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight` | Solo el H1 de la home. Comprobado a 320 px sin desbordar. |
 | H1 de página | `text-3xl sm:text-4xl font-semibold tracking-tight` | |
 | H2 de sección | `text-xl sm:text-2xl font-semibold tracking-tight` | Precedido de `Eyebrow`. |
 | Título de tarjeta | `text-lg font-semibold tracking-tight` | |
@@ -150,6 +151,7 @@ Contenido dentro de un marco con degradado: radio interior `rounded-[calc(1.5rem
 
 - Padding: `p-6` en móvil, `sm:p-8` en escritorio (tarjetas compactas de rejilla: `p-6` fijo).
 - Zonas secundarias dentro de la tarjeta: `border-t border-hairline bg-canvas/60`.
+- Fondo de foto de producto (bento y duelos de la portada): `rounded-2xl bg-zinc-100/70`, gris neutro que no compite con el color de la imagen. Insignia de duelo «VS»: `size-11 rounded-full bg-ink text-white font-mono text-xs ring-4 ring-white shadow-float`.
 - Separación entre tarjetas apiladas: `space-y-6` / `gap-6`; en rejillas de producto, `gap-4`.
 
 ### 6.2 Bordes con degradado — `GlowFrame` / `border-gradient-brand`
