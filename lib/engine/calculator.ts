@@ -90,9 +90,9 @@ const MAC_NON_5K_IMAGE_CAP = 90;
 const GOOD_PRICE_MARGIN = 1.1;
 const GOOD_PRICE_RANGE_POSITION = 0.25;
 
-const BUDGET_TOLERANCE = 1.25; // por encima de presupuesto × 1.25 se descarta
-const SCORE_RECOMMENDED = 70;
-const SCORE_MIN = 50;
+export const BUDGET_TOLERANCE = 1.25; // por encima de presupuesto × 1.25 se descarta
+export const SCORE_RECOMMENDED = 70;
+export const SCORE_MIN = 50;
 const MIN_FREE_DESK_CM = 35; // fondo libre mínimo para teclado + distancia de visión
 const COMFORT_FREE_DESK_CM = 45;
 
