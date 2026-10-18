@@ -68,6 +68,25 @@ Este documento es la **referencia obligatoria** para cualquier interfaz de compr
 
 > **Regla:** texto de color de marca → `text-brand-strong`. `text-brand` solo en iconos, bordes y cifras grandes (≥ 24 px, o ≥ 18,66 px en negrita).
 
+### 2.5 Portada: nivel AAA
+
+La home (`app/page.tsx`, `components/home/`) cumple **WCAG 2.2 AAA** (7:1 en texto normal, 4,5:1 en texto grande). Sus primitivas están en [`components/home/SectionHeader.tsx`](components/home/SectionHeader.tsx) (`aaaButton`, `tagEmerald`, `tagAmber`, `homeEyebrow`, `tile`).
+
+| Uso en la portada | Par | Ratio |
+| --- | --- | --- |
+| Texto secundario | `zinc-600` sobre blanco / `canvas` / tintes pastel | 7,73 / 7,22 / ≥ 7,29:1 |
+| Subtítulo sobre el aura del hero (punto más intenso) | `zinc-700` | 8,62:1 (`zinc-600` bajaría a 6,38) |
+| CTA | Blanco sobre `emerald-800` → hover `emerald-900` | 7,68 → 9,72:1 |
+| Botón «Buscar» e insignia «VS» (menta) | `ink` sobre `emerald-500` / `emerald-400` / `teal-300` | 7,74 / 10,22 / 13,28:1 |
+| Etiqueta verde · ámbar | `emerald-900` sobre `emerald-100` · `amber-900` sobre `amber-100` | 8,57 · 8,15:1 |
+| Ventajas de duelo | `emerald-800` sobre `emerald-50` | 7,29:1 |
+| Titular «exacto.» (≥ 48 px) | `text-gradient-brand-deep` (`brand-deep` → `brand-strong`) sobre el aura | ≥ 4,53:1 |
+| Unidad «%» de métricas (≥ 48 px) | `emerald-700` sobre blanco | 5,48:1 |
+
+- **Prohibido en la portada:** texto blanco sobre `emerald-600`/`emerald-500` (3,77 / 2,54:1) y `text-gradient-brand` (su extremo menta da 2,4:1).
+- **Tintes de tarjeta por tipo de contenido:** recomendación del algoritmo `bg-emerald-50/60 border-emerald-200/70`; precio / mínimo histórico `bg-amber-50/50 border-amber-200/60`; herramientas y duelos `bg-white border-zinc-200`.
+- **Fondo decorativo del hero:** `bg-dot-grid` (malla de puntos con máscara) y esferas `bg-emerald-400/15` · `bg-teal-300/10` con `blur-3xl` y `motion-safe:animate-aura` (deriva de 18 s, desactivada con movimiento reducido). Siempre `aria-hidden` y `pointer-events-none`.
+
 ---
 
 ## 3. Tipografía
@@ -151,7 +170,7 @@ Contenido dentro de un marco con degradado: radio interior `rounded-[calc(1.5rem
 
 - Padding: `p-6` en móvil, `sm:p-8` en escritorio (tarjetas compactas de rejilla: `p-6` fijo).
 - Zonas secundarias dentro de la tarjeta: `border-t border-hairline bg-canvas/60`.
-- Fondo de foto de producto (bento y duelos de la portada): `rounded-2xl bg-zinc-100/70`, gris neutro que no compite con el color de la imagen. Insignia de duelo «VS»: `size-11 rounded-full bg-ink text-white font-mono text-xs ring-4 ring-white shadow-float`.
+- Fondo de foto de producto en la portada: `rounded-2xl bg-zinc-100/70` en los duelos; dentro de tarjetas tintadas, `bg-white` con `ring-1 ring-inset` del tinte (las fotos tienen fondo blanco). Insignia de duelo «VS»: `size-11 rounded-full bg-gradient-to-br from-teal-300 via-emerald-400 to-emerald-500 text-ink font-mono text-xs ring-4 ring-white shadow-glow`.
 - Separación entre tarjetas apiladas: `space-y-6` / `gap-6`; en rejillas de producto, `gap-4`.
 
 ### 6.2 Bordes con degradado — `GlowFrame` / `border-gradient-brand`

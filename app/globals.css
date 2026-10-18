@@ -111,6 +111,37 @@
     radial-gradient(55% 60% at 90% 90%, rgb(16 185 129 / 0.1), transparent 70%);
 }
 
+/* Malla de puntos que se desvanece hacia los bordes (fondo del hero de la portada). Puramente decorativa. */
+@utility bg-dot-grid {
+  background-image: radial-gradient(rgb(229 231 235) 1px, transparent 1px); /* zinc-200 */
+  background-size: 16px 16px;
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 70%, transparent 100%);
+}
+
+/* Deriva lenta de las esferas del aura. Se anula con prefers-reduced-motion (regla global de arriba). */
+@theme {
+  --animate-aura: aura-drift 18s ease-in-out infinite alternate;
+  @keyframes aura-drift {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+      transform: translate3d(2rem, 1.5rem, 0) scale(1.08);
+    }
+  }
+}
+
+/*
+ * Titular de acento AAA: verde profundo → esmeralda fuerte. Ambos extremos ≥ 4,5:1 (texto grande) incluso sobre
+ * el aura del hero; el degradado claro (brand → accent) solo llega a 2,4:1.
+ */
+@utility text-gradient-brand-deep {
+  background: linear-gradient(120deg, var(--brand-primary-deep), var(--brand-primary-strong));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 /* Texto con degradado de marca (titulares de acento). */
 @utility text-gradient-brand {
   background: linear-gradient(120deg, var(--brand-primary), var(--brand-accent));
