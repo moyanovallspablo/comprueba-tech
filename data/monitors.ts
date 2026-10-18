@@ -1,7 +1,9 @@
 import type { DailyFriction, Monitor } from "@/types/monitor";
 
 /**
- * Datos de fabricante + precios orientativos de mercado en España.
+ * Datos de fabricante + precios orientativos de mercado en España (euros enteros), revisados en Amazon.es el
+ * 2026-10-18: precio de un vendedor con stock en estado nuevo; si solo hay ofertas de terceros muy por encima del
+ * precio de lanzamiento, se mantiene el de referencia y se anota junto al ASIN.
  * `meses_mercado` se calcula a partir de `fecha_lanzamiento` respecto a la fecha del snapshot de precios
  * (fija, para que el prerender estático y el cliente coincidan). Actualízala al refrescar precios.
  */
@@ -92,8 +94,8 @@ const seeds: MonitorSeed[] = [
     modelo: "UltraSharp U2724DE",
     asin: "B0CNJSX8N8",
     imageUrl: "https://m.media-amazon.com/images/I/711Sz0xINOL._AC_SL1500_.jpg",
-    precio_eur: 529,
-    precio_minimo_historico_eur: 449,
+    precio_eur: 437,
+    precio_minimo_historico_eur: 437,
     precio_lanzamiento_eur: 699,
     fecha_lanzamiento: "2023-09",
     pulgadas: 27,
@@ -132,6 +134,7 @@ const seeds: MonitorSeed[] = [
     marca: "LG",
     modelo: "UltraGear 27GR83Q-B",
     asin: "B0C62DCBSJ",
+    // Amazon.es (2026-10-18): una unidad de un vendedor externo a 429 €. Se mantiene el precio de referencia.
     imageUrl: "https://m.media-amazon.com/images/I/71V6IEx8RaL._AC_SL1500_.jpg",
     precio_eur: 299,
     precio_minimo_historico_eur: 249,
@@ -173,7 +176,7 @@ const seeds: MonitorSeed[] = [
     modelo: "ProArt PA278CV",
     asin: "B08TX3F74X",
     imageUrl: "https://m.media-amazon.com/images/I/81QaKRn1X4L._AC_SL1500_.jpg",
-    precio_eur: 329,
+    precio_eur: 289,
     precio_minimo_historico_eur: 279,
     precio_lanzamiento_eur: 449,
     fecha_lanzamiento: "2020-07",
@@ -212,7 +215,6 @@ const seeds: MonitorSeed[] = [
     id: "apple-studio-display",
     marca: "Apple",
     modelo: "Studio Display",
-    imageUrl: "/monitors/apple-studio-display.webp",
     precio_eur: 1749,
     precio_minimo_historico_eur: 1449,
     precio_lanzamiento_eur: 1749,
@@ -254,8 +256,8 @@ const seeds: MonitorSeed[] = [
     modelo: "Studio Display (soporte regulable)",
     asin: "B0DZDWXVT6",
     imageUrl: "https://m.media-amazon.com/images/I/715IjfY5t6L._AC_SL1500_.jpg",
-    precio_eur: 2209,
-    precio_minimo_historico_eur: 1999,
+    precio_eur: 1879,
+    precio_minimo_historico_eur: 1879,
     precio_lanzamiento_eur: 2209,
     fecha_lanzamiento: "2022-03",
     pulgadas: 27,
@@ -295,6 +297,7 @@ const seeds: MonitorSeed[] = [
     marca: "Alienware",
     modelo: "AW3423DWF",
     asin: "B0BHTDDMDN",
+    // Amazon.es (2026-10-18): no disponible. Se mantiene el precio de referencia.
     imageUrl: "https://m.media-amazon.com/images/I/41QJ6Cy2oqL._AC_SL1280_.jpg",
     precio_eur: 699,
     precio_minimo_historico_eur: 599,
@@ -336,6 +339,7 @@ const seeds: MonitorSeed[] = [
     marca: "AOC",
     modelo: "24G2SPU",
     asin: "B09T73DNXY",
+    // Amazon.es (2026-10-18): solo un vendedor externo a 226,99 €. Se mantiene el precio de referencia.
     imageUrl: "https://m.media-amazon.com/images/I/71kdAg2nRdL._AC_SL1500_.jpg",
     precio_eur: 159,
     precio_minimo_historico_eur: 129,
@@ -377,7 +381,7 @@ const seeds: MonitorSeed[] = [
     modelo: "Odyssey OLED G9 (G95SC)",
     asin: "B0C9YMLGML",
     imageUrl: "https://m.media-amazon.com/images/I/81axb0KXNfL._SL1500_.jpg",
-    precio_eur: 1099,
+    precio_eur: 1011,
     precio_minimo_historico_eur: 899,
     precio_lanzamiento_eur: 1799,
     fecha_lanzamiento: "2023-08",
@@ -417,6 +421,7 @@ const seeds: MonitorSeed[] = [
     marca: "LG",
     modelo: "32UN880 Ergo",
     asin: "B0B66K2R8F",
+    // Amazon.es (2026-10-18): solo un vendedor externo a 846,94 €. Se mantiene el precio de referencia.
     imageUrl: "https://m.media-amazon.com/images/I/71Lhu4DP6lL._AC_SL1500_.jpg",
     precio_eur: 449,
     precio_minimo_historico_eur: 379,
@@ -457,7 +462,6 @@ const seeds: MonitorSeed[] = [
     id: "gigabyte-m28u",
     marca: "Gigabyte",
     modelo: "M28U",
-    imageUrl: "/monitors/gigabyte-m28u.webp",
     precio_eur: 429,
     precio_minimo_historico_eur: 349,
     precio_lanzamiento_eur: 649,
@@ -497,6 +501,7 @@ const seeds: MonitorSeed[] = [
     marca: "MSI",
     modelo: "PRO MP241X",
     asin: "B09S3YHT8L",
+    // Amazon.es (2026-10-18): solo un vendedor externo a 271,68 €. Se mantiene el precio de referencia.
     imageUrl: "https://m.media-amazon.com/images/I/71KLlIdID4L._AC_SL1500_.jpg",
     precio_eur: 89,
     precio_minimo_historico_eur: 75,
@@ -537,6 +542,8 @@ const seeds: MonitorSeed[] = [
 
 export const monitors: Monitor[] = seeds.map((m) => ({
   ...m,
+  // Si el precio actual baja del mínimo registrado, ese es el nuevo mínimo histórico.
+  precio_minimo_historico_eur: Math.min(m.precio_minimo_historico_eur, m.precio_eur),
   meses_mercado: monthsBetween(m.fecha_lanzamiento, DATA_SNAPSHOT),
   friccion_diaria: FRICCION[m.id],
 }));

@@ -30,17 +30,19 @@ export function MonitorImage({
   caption?: string;
   className?: string;
 }) {
+  // Sin foto (modelos sin ficha en Amazon) se dibuja directamente la ilustración, sin pedir nada a la red.
+  const src = m.imageUrl;
   // El estado va ligado a la URL para reiniciarse si el mismo componente pasa a otro monitor.
-  const [state, setState] = useState<{ src: string; status: Status }>({ src: m.imageUrl, status: "loading" });
-  const status = state.src === m.imageUrl ? state.status : "loading";
+  const [state, setState] = useState<{ src?: string; status: Status }>({ src, status: "loading" });
+  const status = !src ? "error" : state.src === src ? state.status : "loading";
   const set = (next: Status) =>
     // Un error tiene prioridad: next/image puede disparar onLoad antes que onError si la imagen falló antes de hidratar.
-    setState((s) => ({ src: m.imageUrl, status: s.src === m.imageUrl && s.status === "error" ? "error" : next }));
+    setState((s) => ({ src, status: s.src === src && s.status === "error" ? "error" : next }));
 
   return (
     <>
       <div className={cx("relative", className)}>
-        {status === "error" ? (
+        {!src || status === "error" ? (
           <MonitorIllustration monitor={m} className="absolute inset-0 size-full" />
         ) : (
           <>
@@ -53,7 +55,7 @@ export function MonitorImage({
               </div>
             )}
             <Image
-              src={m.imageUrl}
+              src={src}
               alt={`${m.marca} ${m.modelo}`}
               fill
               sizes={sizes}

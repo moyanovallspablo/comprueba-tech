@@ -85,7 +85,7 @@ export interface Monitor {
   consumo_tipico_w: number;
   garantia_anios: number;
   friccion_diaria: DailyFriction;
-  imageUrl: string; // ruta en /public (/monitors/<id>.webp) o URL de un dominio en images.remotePatterns; si no carga se dibuja una ilustración a escala
+  imageUrl?: string; // ruta en /public (/monitors/<id>.webp) o URL de un dominio en images.remotePatterns; sin ella o si no carga se dibuja una ilustración a escala
   asin?: string; // ASIN de amazon.es verificado; sin él, el botón de compra lleva a una búsqueda
   afiliado_url?: string; // sobrescribe el enlace de compra; si es de Amazon también recibe el tag
   notas?: string;
