@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Briefcase, Gamepad2, Laptop, Wallet, type LucideIcon } from "lucide-react";
 import { Duels } from "@/components/home/Duels";
 import { HeroSearch } from "@/components/home/HeroSearch";
+import { HeroStage } from "@/components/home/HeroStage";
 import { Highlights } from "@/components/home/Highlights";
 import { TransparencyBanner } from "@/components/home/TransparencyBanner";
 import { DEFAULT_FILTERS, QUICK_PRESETS, applyFilters, catalogHref } from "@/lib/catalog";
@@ -31,13 +32,11 @@ export default function Home() {
 
 function Hero() {
   return (
-    <section className="relative isolate mx-auto max-w-3xl px-1 text-center">
-      <HeroAura />
-
+    <HeroStage>
       <h1 className="text-5xl font-semibold tracking-tight text-ink sm:text-6xl lg:text-7xl">
         Encuentra el monitor <span className="text-gradient-brand-deep">exacto.</span>
       </h1>
-      {/* zinc-700: sobre el punto más intenso del aura, zinc-600 bajaría a 6,4:1 */}
+      {/* zinc-700: en el peor caso (esferas + foco del cursor) da 7,36:1; zinc-600 bajaría a 5,45:1 */}
       <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-zinc-700 sm:text-lg">
         Sin patrocinios. Evaluado con datos de especificaciones reales calculados por algoritmo.
       </p>
@@ -67,17 +66,6 @@ function Hero() {
           );
         })}
       </ul>
-    </section>
-  );
-}
-
-/** Aura de marca detrás del titular y el buscador: malla de puntos y dos esferas difuminadas que derivan despacio. */
-function HeroAura() {
-  return (
-    <div aria-hidden className="pointer-events-none absolute -inset-x-24 -bottom-16 -top-24 -z-10">
-      <div className="bg-dot-grid absolute inset-0" />
-      <div className="absolute left-0 top-0 size-80 rounded-full bg-emerald-400/15 blur-3xl motion-safe:animate-aura sm:left-8 sm:size-112" />
-      <div className="absolute bottom-0 right-0 size-80 rounded-full bg-teal-300/10 blur-3xl motion-safe:animate-aura motion-safe:[animation-delay:-9s] sm:right-8 sm:size-112" />
-    </div>
+    </HeroStage>
   );
 }

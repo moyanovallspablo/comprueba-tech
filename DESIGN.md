@@ -75,17 +75,17 @@ La home (`app/page.tsx`, `components/home/`) cumple **WCAG 2.2 AAA** (7:1 en tex
 | Uso en la portada | Par | Ratio |
 | --- | --- | --- |
 | Texto secundario | `zinc-600` sobre blanco / `canvas` / tintes pastel | 7,73 / 7,22 / ≥ 7,29:1 |
-| Subtítulo sobre el aura del hero (punto más intenso) | `zinc-700` | 8,62:1 (`zinc-600` bajaría a 6,38) |
+| Subtítulo sobre el aura del hero (peor caso: esferas + foco del cursor) | `zinc-700` | 7,36:1 (`zinc-600` bajaría a 5,45) |
 | CTA | Blanco sobre `emerald-800` → hover `emerald-900` | 7,68 → 9,72:1 |
 | Botón «Buscar» e insignia «VS» (menta) | `ink` sobre `emerald-500` / `emerald-400` / `teal-300` | 7,74 / 10,22 / 13,28:1 |
 | Etiqueta verde · ámbar | `emerald-900` sobre `emerald-100` · `amber-900` sobre `amber-100` | 8,57 · 8,15:1 |
 | Ventajas de duelo | `emerald-800` sobre `emerald-50` | 7,29:1 |
-| Titular «exacto.» (≥ 48 px) | `text-gradient-brand-deep` (`brand-deep` → `brand-strong`) sobre el aura | ≥ 4,53:1 |
+| Titular «exacto.» (≥ 48 px) | `text-gradient-brand-deep` (`emerald-900` → `brand-deep`) sobre el aura, peor caso | ≥ 5,41:1 (`brand-strong` bajaría a 3,86) |
 | Unidad «%» de métricas (≥ 48 px) | `emerald-700` sobre blanco | 5,48:1 |
 
 - **Prohibido en la portada:** texto blanco sobre `emerald-600`/`emerald-500` (3,77 / 2,54:1) y `text-gradient-brand` (su extremo menta da 2,4:1).
 - **Tintes de tarjeta por tipo de contenido:** recomendación del algoritmo `bg-emerald-50/60 border-emerald-200/70`; precio / mínimo histórico `bg-amber-50/50 border-amber-200/60`; herramientas y duelos `bg-white border-zinc-200`.
-- **Fondo decorativo del hero:** `bg-dot-grid` (malla de puntos con máscara) y esferas `bg-emerald-400/15` · `bg-teal-300/10` con `blur-3xl` y `motion-safe:animate-aura` (deriva de 18 s, desactivada con movimiento reducido). Siempre `aria-hidden` y `pointer-events-none`.
+- **Fondo decorativo del hero** ([`HeroStage`](components/home/HeroStage.tsx)): `bg-dot-grid` (malla de puntos con máscara); dos esferas `bg-gradient-to-br from-emerald-400/25 via-teal-300/20 to-transparent` con `blur-3xl` y `motion-safe:animate-aura` (deriva de 18 s); y un foco `bg-emerald-400/20 blur-[100px]` que sigue al cursor (variables CSS + `requestAnimationFrame`, sin re-render) y vuelve a su reposo al salir. El foco solo se activa con ratón (`hover: hover` y `pointer: fine`) y se oculta con movimiento reducido. Todo en `-z-10`, `aria-hidden` y `pointer-events-none`: nunca queda por encima del contenido.
 
 ---
 

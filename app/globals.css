@@ -132,11 +132,12 @@
 }
 
 /*
- * Titular de acento AAA: verde profundo → esmeralda fuerte. Ambos extremos ≥ 4,5:1 (texto grande) incluso sobre
- * el aura del hero; el degradado claro (brand → accent) solo llega a 2,4:1.
+ * Titular de acento AAA: emerald-900 → brand-deep (emerald-800). Ambos extremos ≥ 4,5:1 (texto grande) en el peor
+ * caso del hero (esferas + foco del cursor superpuestos: 6,85 y 5,41:1). brand-strong bajaría a 3,86:1 y el
+ * degradado claro (brand → accent) a menos de 2,4:1.
  */
 @utility text-gradient-brand-deep {
-  background: linear-gradient(120deg, var(--brand-primary-deep), var(--brand-primary-strong));
+  background: linear-gradient(120deg, #064e3b, var(--brand-primary-deep));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
