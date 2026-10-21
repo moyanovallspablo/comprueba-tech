@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { DATA_SNAPSHOT, monitors } from "@/data/monitors";
 import { LEGAL } from "@/lib/legal";
-import { ADVISOR_HREF, monitorHref } from "@/lib/routes";
+import { ADVISOR_HREF, PPI_SIMULATOR_HREF, monitorHref } from "@/lib/routes";
 import { SITE_URL, canonicalCompareHrefs } from "@/lib/seo";
 
 const baseUrl = SITE_URL;
@@ -26,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     catalog(ADVISOR_HREF, 0.8),
     catalog("/monitores", 0.8),
     catalog("/comparar", 0.8),
+    catalog(PPI_SIMULATOR_HREF, 0.7),
     ...monitors.map((m) => catalog(monitorHref(m.id), 0.9)),
     ...canonicalCompareHrefs().map((href) => catalog(href, 0.9)),
     ...LEGAL_PATHS.map((path) => ({

@@ -5,6 +5,10 @@ export const ADVISOR_HREF = "/asesor";
 
 export const monitorHref = (id: string) => `/monitor/${id}`;
 
+/** Simulador de nitidez y PPI; con `?monitor=<id>` arranca con ese monitor del catálogo. */
+export const PPI_SIMULATOR_HREF = "/simulador-ppi";
+export const ppiSimulatorHref = (id: string) => `${PPI_SIMULATOR_HREF}?monitor=${encodeURIComponent(id)}`;
+
 export const compareHref = (a: string, b: string) => `/comparar/${a}${COMPARE_SEPARATOR}${b}`;
 
 /** Ancla de la comparativa que abre el visor 3D al llegar (botón "Lanzar comparativa 3D" del hub). */

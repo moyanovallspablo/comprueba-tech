@@ -87,6 +87,8 @@ const FRICCION: Record<string, DailyFriction> = {
   },
 };
 
+// PcComponentes (2026-10-21): URLs de búsqueda y precios de ejemplo para probar el bloque multitienda.
+// Sustitúyelos por la ficha y el precio verificados antes de activar el tag definitivo.
 const seeds: MonitorSeed[] = [
   {
     id: "dell-u2724de",
@@ -95,6 +97,8 @@ const seeds: MonitorSeed[] = [
     asin: "B0CNJSX8N8",
     imageUrl: "https://m.media-amazon.com/images/I/711Sz0xINOL._AC_SL1500_.jpg",
     precio_eur: 437,
+    pccomponentesUrl: "https://www.pccomponentes.com/buscar/?query=Dell+U2724DE",
+    pccomponentesPrecio: 449,
     precio_minimo_historico_eur: 437,
     precio_lanzamiento_eur: 699,
     fecha_lanzamiento: "2023-09",
@@ -137,6 +141,8 @@ const seeds: MonitorSeed[] = [
     // Amazon.es (2026-10-18): una unidad de un vendedor externo a 429 €. Se mantiene el precio de referencia.
     imageUrl: "https://m.media-amazon.com/images/I/71V6IEx8RaL._AC_SL1500_.jpg",
     precio_eur: 299,
+    pccomponentesUrl: "https://www.pccomponentes.com/buscar/?query=LG+27GR83Q-B",
+    pccomponentesPrecio: 309,
     precio_minimo_historico_eur: 249,
     precio_lanzamiento_eur: 449,
     fecha_lanzamiento: "2023-03",
@@ -177,6 +183,8 @@ const seeds: MonitorSeed[] = [
     asin: "B08TX3F74X",
     imageUrl: "https://m.media-amazon.com/images/I/81QaKRn1X4L._AC_SL1500_.jpg",
     precio_eur: 289,
+    pccomponentesUrl: "https://www.pccomponentes.com/buscar/?query=ASUS+PA278CV",
+    pccomponentesPrecio: 279,
     precio_minimo_historico_eur: 279,
     precio_lanzamiento_eur: 449,
     fecha_lanzamiento: "2020-07",
@@ -343,6 +351,8 @@ const seeds: MonitorSeed[] = [
     // Amazon.es (2026-10-18): solo un vendedor externo a 226,99 €. Se mantiene el precio de referencia.
     imageUrl: "https://m.media-amazon.com/images/I/71kdAg2nRdL._AC_SL1500_.jpg",
     precio_eur: 159,
+    pccomponentesUrl: "https://www.pccomponentes.com/buscar/?query=AOC+24G2SPU",
+    pccomponentesPrecio: 155,
     precio_minimo_historico_eur: 129,
     precio_lanzamiento_eur: 219,
     fecha_lanzamiento: "2021-03",
@@ -383,6 +393,8 @@ const seeds: MonitorSeed[] = [
     asin: "B0C9YMLGML",
     imageUrl: "https://m.media-amazon.com/images/I/81axb0KXNfL._SL1500_.jpg",
     precio_eur: 1011,
+    pccomponentesUrl: "https://www.pccomponentes.com/buscar/?query=Samsung+Odyssey+OLED+G9",
+    pccomponentesPrecio: 1011,
     precio_minimo_historico_eur: 899,
     precio_lanzamiento_eur: 1799,
     fecha_lanzamiento: "2023-08",
@@ -425,6 +437,8 @@ const seeds: MonitorSeed[] = [
     // Amazon.es (2026-10-18): solo un vendedor externo a 846,94 €. Se mantiene el precio de referencia.
     imageUrl: "https://m.media-amazon.com/images/I/71Lhu4DP6lL._AC_SL1500_.jpg",
     precio_eur: 449,
+    pccomponentesUrl: "https://www.pccomponentes.com/buscar/?query=LG+32UN880",
+    pccomponentesPrecio: 439,
     precio_minimo_historico_eur: 379,
     precio_lanzamiento_eur: 699,
     fecha_lanzamiento: "2020-06",
@@ -464,6 +478,8 @@ const seeds: MonitorSeed[] = [
     marca: "Gigabyte",
     modelo: "M28U",
     precio_eur: 429,
+    pccomponentesUrl: "https://www.pccomponentes.com/buscar/?query=Gigabyte+M28U",
+    pccomponentesPrecio: 419,
     precio_minimo_historico_eur: 349,
     precio_lanzamiento_eur: 649,
     fecha_lanzamiento: "2021-07",

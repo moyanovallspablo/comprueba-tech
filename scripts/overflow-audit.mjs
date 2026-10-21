@@ -37,6 +37,7 @@ const SCENARIOS = [
   { name: "/comparar/dell-u2724de-vs-lg-27gr83q", path: "/comparar/dell-u2724de-vs-lg-27gr83q" },
   { name: "/monitor/dell-u2724de", path: "/monitor/dell-u2724de" },
   { name: "/monitor/lg-27gr83q", path: "/monitor/lg-27gr83q" },
+  { name: "/simulador-ppi", path: "/simulador-ppi?monitor=gigabyte-m28u" },
   ...["/sobre-nosotros", "/pautas-editoriales", "/aviso-legal", "/privacidad", "/terminos", "/cookies"].map((path) => ({
     name: path,
     path,

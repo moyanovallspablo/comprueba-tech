@@ -26,6 +26,10 @@ export const isPending = (value: string) => value.startsWith("[");
 export const AMAZON_DISCLOSURE =
   "Como Afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables.";
 
+/** Declaración de afiliación de PcComponentes, junto a la de Amazon en el pie y en las pautas editoriales. */
+export const PCCOMPONENTES_DISCLOSURE =
+  "También participamos en el programa de afiliados de PcComponentes: las compras en pccomponentes.com desde nuestros enlaces pueden generarnos una comisión.";
+
 export interface FooterLink {
   href: string;
   label: string;

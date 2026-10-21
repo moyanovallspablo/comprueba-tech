@@ -9,12 +9,13 @@ import { eur } from "@/components/advisor/setup";
 import { Card } from "@/components/advisor/ui";
 import { MonitorImage } from "@/components/monitor/MonitorImage";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { PpiSummary } from "@/components/tools/PpiSummary";
 import {
-  BuyButton,
   DailyFrictionGrid,
   PriceStatusBadge,
   SectionTitle,
   SpecTable,
+  WhereToBuy,
 } from "@/components/monitor/ProductParts";
 import {
   InterpretationAndSacrifice,
@@ -108,7 +109,7 @@ async function MonitorContent({ params }: { params: PageProps<"/monitor/[id]">["
           <p className="mt-2 text-sm text-zinc-500">{priceStatus.detail}</p>
 
           <div className="mt-auto pt-8">
-            <BuyButton monitor={m} className="w-full sm:w-auto" />
+            <WhereToBuy monitor={m} className="w-full sm:w-auto" />
             <a
               href="#transparencia"
               className="mt-2 inline-flex items-center gap-2 text-[11px] text-zinc-500 transition hover:text-brand-strong"
@@ -145,6 +146,7 @@ async function MonitorContent({ params }: { params: PageProps<"/monitor/[id]">["
 
         <section className="mt-14">
           <SectionTitle eyebrow="Especificaciones" title="Ficha técnica completa" />
+          <PpiSummary monitor={m} className="mb-6" />
           <SpecTable monitor={m} />
           {m.notas && <p className="mt-4 px-1 text-sm text-zinc-500">{m.notas}</p>}
         </section>
@@ -170,7 +172,7 @@ async function MonitorContent({ params }: { params: PageProps<"/monitor/[id]">["
             {eur(m.precio_eur)} · {priceStatus.label}
           </p>
         </div>
-        <BuyButton monitor={m} />
+        <WhereToBuy monitor={m} className="sm:max-w-sm" />
       </Card>
     </>
   );

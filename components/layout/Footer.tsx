@@ -2,7 +2,7 @@ import Link from "next/link";
 import { BrandMark, Wordmark } from "@/components/site/BrandMark";
 import { TransparencyNote } from "@/components/site/RadicalTransparency";
 import { DATA_SNAPSHOT } from "@/data/monitors";
-import { AMAZON_DISCLOSURE, LEGAL, LEGAL_LINKS, PROJECT_LINKS, type FooterLink } from "@/lib/legal";
+import { AMAZON_DISCLOSURE, LEGAL, PCCOMPONENTES_DISCLOSURE, LEGAL_LINKS, PROJECT_LINKS, type FooterLink } from "@/lib/legal";
 import { NAV_ITEMS } from "./nav";
 
 const SNAPSHOT_LABEL = new Date(`${DATA_SNAPSHOT}-01T00:00:00Z`).toLocaleDateString("es-ES", {
@@ -40,7 +40,10 @@ export function Footer() {
 
       <div className="border-t border-hairline">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 text-xs text-zinc-500 sm:px-6 md:flex-row md:items-center md:justify-between md:gap-6">
-          <p className="text-zinc-600">{AMAZON_DISCLOSURE}</p>
+          <div className="space-y-1 text-zinc-600">
+            <p>{AMAZON_DISCLOSURE}</p>
+            <p>{PCCOMPONENTES_DISCLOSURE}</p>
+          </div>
           <p className="shrink-0">
             © {LEGAL.updated.slice(0, 4)} {LEGAL.siteName} · Precios orientativos en España · Datos de {SNAPSHOT_LABEL}
           </p>

@@ -1,9 +1,11 @@
-import { ArrowLeftRight, LayoutGrid, Sparkles, type LucideIcon } from "lucide-react";
-import { ADVISOR_HREF } from "@/lib/routes";
+import { ArrowLeftRight, LayoutGrid, ScanEye, Sparkles, type LucideIcon } from "lucide-react";
+import { ADVISOR_HREF, PPI_SIMULATOR_HREF } from "@/lib/routes";
 
 export interface NavItem {
   href: string;
   label: string;
+  /** Etiqueta corta para la navegación estrecha (móvil y tablet); si falta se usa `label`. */
+  shortLabel?: string;
   description: string;
   icon: LucideIcon;
   keywords: string;
@@ -35,5 +37,14 @@ export const NAV_ITEMS: NavItem[] = [
     icon: ArrowLeftRight,
     keywords: "comparar comparativas versus frente a frente",
     isActive: (p) => p.startsWith("/comparar"),
+  },
+  {
+    href: PPI_SIMULATOR_HREF,
+    label: "Simulador PPI",
+    shortLabel: "PPI",
+    description: "Nitidez, PPI y escalado en Windows y macOS",
+    icon: ScanEye,
+    keywords: "ppi nitidez densidad pixeles escalado retina mac windows simulador distancia",
+    isActive: (p) => p.startsWith(PPI_SIMULATOR_HREF),
   },
 ];

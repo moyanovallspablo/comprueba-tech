@@ -1,5 +1,6 @@
 import { monitors as defaultCatalog } from "@/data/monitors";
 import type { CurrentEquipment, Monitor, PanelType, Profile } from "@/types/monitor";
+import { calcPpi } from "@/lib/ppi";
 import { explain } from "./explain";
 
 // ───────────────────────────── Tipos de salida ─────────────────────────────
@@ -114,8 +115,7 @@ function curve(x: number, points: [number, number][]): number {
 }
 
 export function getPpi(m: Monitor): number {
-  const { ancho, alto } = m.resolucion;
-  return Math.sqrt(ancho ** 2 + alto ** 2) / m.pulgadas;
+  return calcPpi(m.resolucion.ancho, m.resolucion.alto, m.pulgadas);
 }
 
 /**

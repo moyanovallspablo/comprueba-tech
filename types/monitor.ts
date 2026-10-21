@@ -88,6 +88,8 @@ export interface Monitor {
   imageUrl?: string; // ruta en /public (/monitors/<id>.webp) o URL de un dominio en images.remotePatterns; sin ella o si no carga se dibuja una ilustración a escala
   asin?: string; // ASIN de amazon.es verificado; sin él, el botón de compra lleva a una búsqueda
   afiliado_url?: string; // sobrescribe el enlace de compra; si es de Amazon también recibe el tag
+  pccomponentesUrl?: string; // ficha o búsqueda en pccomponentes.com; recibe el tag de PcComponentes al salir
+  pccomponentesPrecio?: number; // EUR en PcComponentes; sin él no se muestra la oferta aunque haya URL
   disponible?: boolean; // false si no hay unidades nuevas a la venta (se declara OutOfStock en el JSON-LD)
   notas?: string;
 }

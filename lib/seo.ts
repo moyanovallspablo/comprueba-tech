@@ -163,3 +163,28 @@ export function productJsonLd(m: Monitor) {
     },
   };
 }
+
+/* ── Herramientas ── */
+
+export const PPI_SIMULATOR_TITLE = "Simulador de PPI y nitidez de monitores";
+export const PPI_SIMULATOR_DESCRIPTION =
+  "Calcula los PPI de cualquier monitor, su nota de nitidez a tu distancia y el escalado ideal en Windows y macOS (Retina 2× o fraccional), con vista previa del texto.";
+
+export function webApplicationJsonLd({ path, name, description }: { path: string; name: string; description: string }) {
+  const url = absoluteUrl(path);
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "@id": `${url}#app`,
+    name,
+    description,
+    url,
+    applicationCategory: "UtilitiesApplication",
+    operatingSystem: "Cualquiera (navegador web)",
+    browserRequirements: "Requiere JavaScript y Canvas",
+    inLanguage: "es-ES",
+    isAccessibleForFree: true,
+    offers: { "@type": "Offer", price: 0, priceCurrency: "EUR" },
+    publisher: { "@type": "Organization", name: LEGAL.siteName, url: SITE_URL },
+  };
+}

@@ -12,7 +12,7 @@ import {
   VERDICT_LABELS,
   type Criterion,
 } from "@/lib/engine/calculator";
-import { LEGAL } from "@/lib/legal";
+import { AMAZON_DISCLOSURE, LEGAL, PCCOMPONENTES_DISCLOSURE } from "@/lib/legal";
 
 export const metadata: Metadata = {
   title: "Pautas editoriales",
@@ -123,27 +123,30 @@ export default function EditorialPage() {
 
       <LegalSection id="afiliacion" title="5. Cómo funcionan los enlaces de afiliación">
         <p>
-          Los botones «Cómpralo hoy» llevan a Amazon con un identificador de afiliado de comprueba.tech. Si compras
-          tras pulsarlo, Amazon nos paga una pequeña comisión sobre la venta. Así funciona, paso a paso:
+          Los botones de compra llevan a Amazon o a PcComponentes con un identificador de afiliado de comprueba.tech.
+          Si compras tras pulsarlo, la tienda nos paga una pequeña comisión sobre la venta. Así funciona, paso a paso:
         </p>
         <ol>
-          <li>Al pulsar el botón, Amazon registra en su propio sitio que llegaste desde nuestro enlace.</li>
+          <li>Al pulsar el botón, la tienda registra en su propio sitio que llegaste desde nuestro enlace.</li>
           <li>
             <strong>Pagas exactamente el mismo precio</strong> que si entraras directamente: la comisión sale del margen
-            de Amazon, no de tu bolsillo.
+            de la tienda, no de tu bolsillo.
           </li>
           <li>
-            No recibimos tus datos personales ni sabemos quién compra: Amazon solo nos facilita informes de ventas
-            agregados.
+            No recibimos tus datos personales ni sabemos quién compra: las tiendas solo nos facilitan informes de
+            ventas agregados.
           </li>
           <li>
             Los enlaces de afiliación están marcados técnicamente como patrocinados (<code>rel=&quot;sponsored&quot;</code>)
             y, en cada ficha, señalados como tales.
           </li>
+          <li>
+            Cuando un monitor está en ambas tiendas mostramos los dos precios y marcamos como «Mejor precio» el más
+            bajo, sin importar qué comisión pague cada tienda. Con el mismo precio no se destaca ninguna.
+          </li>
         </ol>
-        <p>
-          Como Afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables.
-        </p>
+        <p>{AMAZON_DISCLOSURE}</p>
+        <p>{PCCOMPONENTES_DISCLOSURE}</p>
       </LegalSection>
 
       <LegalSection id="correcciones" title="6. Errores y correcciones">

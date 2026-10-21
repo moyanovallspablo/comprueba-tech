@@ -9,7 +9,7 @@ import { Card, Eyebrow } from "@/components/advisor/ui";
 import { AlgorithmVerdict, CompareSelector } from "@/components/compare/CompareClient";
 import { CompareTable, countAdvantages } from "@/components/compare/CompareTable";
 import { MonitorImage } from "@/components/monitor/MonitorImage";
-import { BuyButton, PriceStatusBadge, SectionTitle } from "@/components/monitor/ProductParts";
+import { PriceStatusBadge, SectionTitle, WhereToBuy } from "@/components/monitor/ProductParts";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getMonitor, monitors } from "@/data/monitors";
 import { getPriceStatus } from "@/lib/engine/calculator";
@@ -171,7 +171,7 @@ function Contender({ monitor: m, advantages }: { monitor: Monitor; advantages: n
         </span>
       </div>
       <div className="mt-auto flex flex-wrap items-center gap-3 pt-6">
-        <BuyButton monitor={m} size="sm" />
+        <WhereToBuy monitor={m} size="sm" />
         <Link href={monitorHref(m.id)} className="inline-flex items-center gap-1 text-xs font-medium text-ink hover:underline">
           Ver ficha completa <ArrowRight className="size-3.5" />
         </Link>

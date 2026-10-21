@@ -80,7 +80,7 @@ export function Header() {
           {/* Navegación (escritorio) */}
           <nav aria-label="Principal" className="mx-auto hidden md:block">
             <ul className="flex items-center gap-0.5 rounded-full bg-black/[0.035] p-1">
-              {NAV_ITEMS.map(({ href, label, icon: Icon, isActive }) => {
+              {NAV_ITEMS.map(({ href, label, shortLabel, icon: Icon, isActive }) => {
                 const active = isActive(pathname);
                 return (
                   <li key={href}>
@@ -100,7 +100,14 @@ export function Header() {
                         />
                       )}
                       <Icon className={cx("relative size-4", active && "text-brand")} />
-                      <span className="relative">{label}</span>
+                      {shortLabel ? (
+                        <>
+                          <span className="relative lg:hidden">{shortLabel}</span>
+                          <span className="relative hidden lg:inline">{label}</span>
+                        </>
+                      ) : (
+                        <span className="relative">{label}</span>
+                      )}
                     </Link>
                   </li>
                 );
@@ -134,10 +141,10 @@ export function Header() {
           </div>
         </div>
 
-        {/* Navegación (móvil): segunda fila con las tres pestañas */}
+        {/* Navegación (móvil): segunda fila con una pestaña por sección */}
         <nav aria-label="Principal" className="border-t border-hairline md:hidden">
-          <ul className="grid h-12 grid-cols-3">
-            {NAV_ITEMS.map(({ href, label, icon: Icon, isActive }) => {
+          <ul className="grid h-12 grid-cols-4">
+            {NAV_ITEMS.map(({ href, label, shortLabel, icon: Icon, isActive }) => {
               const active = isActive(pathname);
               return (
                 <li key={href}>
@@ -145,16 +152,16 @@ export function Header() {
                     href={href}
                     aria-current={active ? "page" : undefined}
                     className={cx(
-                      "relative flex h-full items-center justify-center gap-2 text-[13px] font-medium transition-colors",
+                      "relative flex h-full items-center justify-center gap-1.5 text-[13px] font-medium transition-colors max-xs:text-xs",
                       active ? "text-ink" : "text-zinc-500",
                     )}
                   >
-                    <Icon className={cx("size-4 shrink-0 max-xs:hidden", active && "text-brand")} />
-                    {label}
+                    <Icon className={cx("size-4 shrink-0 max-sm:hidden", active && "text-brand")} />
+                    {shortLabel ?? label}
                     {active && (
                       <motion.span
                         layoutId="nav-underline"
-                        className="absolute inset-x-6 -bottom-px h-0.5 rounded-full bg-gradient-to-r from-brand to-brand-accent"
+                        className="absolute inset-x-4 -bottom-px h-0.5 rounded-full bg-gradient-to-r from-brand to-brand-accent"
                         transition={{ type: "spring", stiffness: 500, damping: 40 }}
                       />
                     )}
